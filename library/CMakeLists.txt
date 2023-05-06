@@ -42,6 +42,9 @@ if   (BUILD_TESTS)
   list        (APPEND PROJECT_LIBRARIES doctest::doctest)
 endif()
 
+find_package(nlohmann_json CONFIG REQUIRED)
+list        (APPEND PROJECT_LIBRARIES nlohmann_json::nlohmann_json)
+
 ##################################################    Targets     ##################################################
 add_library(${PROJECT_NAME} ${PROJECT_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC 
