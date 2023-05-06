@@ -7,7 +7,7 @@ cd vcpkg
 if [ ! -f "vcpkg" ] ; then ./bootstrap-vcpkg.sh ; fi
 
 VCPKG_DEFAULT_TRIPLET=x64-linux
-./vcpkg install --recurse doctest nlohmann-json
+./vcpkg install --recurse doctest nlohmann-json taskflow
 cd ..
 
 cmake -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake ..

@@ -45,6 +45,9 @@ endif()
 find_package(nlohmann_json CONFIG REQUIRED)
 list        (APPEND PROJECT_LIBRARIES nlohmann_json::nlohmann_json)
 
+find_package(Taskflow CONFIG REQUIRED)
+list        (APPEND PROJECT_LIBRARIES Taskflow::Taskflow)
+
 ##################################################    Targets     ##################################################
 add_library(${PROJECT_NAME} ${PROJECT_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC 
