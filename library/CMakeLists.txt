@@ -1,6 +1,6 @@
 ##################################################    Project     ##################################################
-cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-project               (makina VERSION 1.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.23 FATAL_ERROR)
+project               (makina VERSION 1.0 LANGUAGES C CXX)
 list                  (APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set_property          (GLOBAL PROPERTY USE_FOLDERS ON)
 set                   (CMAKE_BUILD_TYPE Release)
@@ -47,6 +47,9 @@ list        (APPEND PROJECT_LIBRARIES nlohmann_json::nlohmann_json)
 
 find_package(Taskflow CONFIG REQUIRED)
 list        (APPEND PROJECT_LIBRARIES Taskflow::Taskflow)
+
+find_package(MPI REQUIRED COMPONENTS C)
+list        (APPEND PROJECT_LIBRARIES MPI::MPI_C)
 
 ##################################################    Targets     ##################################################
 add_library(${PROJECT_NAME} ${PROJECT_FILES})
