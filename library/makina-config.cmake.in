@@ -1,0 +1,13 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(Eigen3)
+find_dependency(nlohmann_json)
+find_dependency(Taskflow)
+find_dependency(thrust)
+@PROJECT_DEPENDENCY_DOCTEST@
+@PROJECT_DEPENDENCY_MPI@
+@PROJECT_DEPENDENCY_DEVICE@
+
+include("${CMAKE_CURRENT_LIST_DIR}/makina-targets.cmake")
