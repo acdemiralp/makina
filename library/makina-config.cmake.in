@@ -2,10 +2,15 @@
 
 include(CMakeFindDependencyMacro)
 
+find_dependency(cxxopts)
 find_dependency(Eigen3)
 find_dependency(nlohmann_json)
+find_dependency(spdlog)
+find_dependency(Stb)
 find_dependency(Taskflow)
 find_dependency(thrust)
+@PROJECT_DEPENDENCY_OPENXR@
+@PROJECT_DEPENDENCY_SDL2@
 @PROJECT_DEPENDENCY_DOCTEST@
 @PROJECT_DEPENDENCY_MPI@
 @PROJECT_DEPENDENCY_DEVICE@

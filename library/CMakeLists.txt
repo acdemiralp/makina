@@ -16,6 +16,7 @@ endif()
 
 ##################################################    Options     ##################################################
 option      (BUILD_SHARED_LIBS "Build shared (dynamic) libraries." ON)
+option      (MAKINA_BUILD_DISPLAY_SYSTEM "Build display system (windowing and XR)." ON)
 option      (MAKINA_BUILD_TESTS "Build tests." OFF)
 option      (MAKINA_USE_MPI "Use MPI for distributed compute (default: OFF)." OFF)
 
@@ -56,12 +57,6 @@ list             (APPEND PROJECT_LIBRARIES Eigen3::Eigen)
 find_package     (nlohmann_json CONFIG REQUIRED)
 list             (APPEND PROJECT_LIBRARIES nlohmann_json::nlohmann_json)
 
-find_package     (OpenXR CONFIG REQUIRED)
-list             (APPEND PROJECT_LIBRARIES OpenXR::headers OpenXR::openxr_loader)
-
-find_package     (SDL2 CONFIG REQUIRED)
-list             (APPEND PROJECT_LIBRARIES $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
-
 find_package     (spdlog CONFIG REQUIRED)
 list             (APPEND PROJECT_LIBRARIES spdlog::spdlog)
 
@@ -73,6 +68,18 @@ list             (APPEND PROJECT_LIBRARIES Taskflow::Taskflow)
 
 find_package     (thrust CONFIG REQUIRED)
 list             (APPEND PROJECT_LIBRARIES thrust::thrust)
+
+if    (MAKINA_BUILD_DISPLAY_SYSTEM)
+  find_package   (OpenXR CONFIG REQUIRED)
+  list           (APPEND PROJECT_LIBRARIES OpenXR::headers OpenXR::openxr_loader)
+  set            (PROJECT_DEPENDENCY_OPENXR "find_dependency(OpenXR)")
+  
+  find_package   (SDL2 CONFIG REQUIRED)
+  list           (APPEND PROJECT_LIBRARIES $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
+  set            (PROJECT_DEPENDENCY_SDL2 "find_dependency(SDL2)")
+  
+  list           (APPEND PROJECT_COMPILE_DEFINITIONS -DMAKINA_BUILD_DISPLAY_SYSTEM)
+endif ()
 
 if    (MAKINA_BUILD_TESTS)
   find_package   (doctest CONFIG REQUIRED)
