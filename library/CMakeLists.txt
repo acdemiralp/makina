@@ -47,11 +47,26 @@ assign_source_group(${PROJECT_FILES})
 ##################################################  Dependencies  ##################################################
 include(import_library)
 
+find_package     (cxxopts CONFIG REQUIRED)
+list             (APPEND PROJECT_LIBRARIES cxxopts::cxxopts)
+
 find_package     (Eigen3 REQUIRED NO_MODULE)
 list             (APPEND PROJECT_LIBRARIES Eigen3::Eigen)
 
 find_package     (nlohmann_json CONFIG REQUIRED)
 list             (APPEND PROJECT_LIBRARIES nlohmann_json::nlohmann_json)
+
+find_package     (OpenXR CONFIG REQUIRED)
+list             (APPEND PROJECT_LIBRARIES OpenXR::headers OpenXR::openxr_loader)
+
+find_package     (SDL2 CONFIG REQUIRED)
+list             (APPEND PROJECT_LIBRARIES $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
+
+find_package     (spdlog CONFIG REQUIRED)
+list             (APPEND PROJECT_LIBRARIES spdlog::spdlog)
+
+find_package     (Stb REQUIRED)
+import_library   (${Stb_INCLUDE_DIR})
 
 find_package     (Taskflow CONFIG REQUIRED)
 list             (APPEND PROJECT_LIBRARIES Taskflow::Taskflow)

@@ -7,7 +7,7 @@ cd vcpkg
 if [ ! -f "vcpkg" ] ; then ./bootstrap-vcpkg.sh ; fi
 
 VCPKG_DEFAULT_TRIPLET=x64-linux
-./vcpkg install --recurse --overlay-ports=../../vcpkg/overlay_ports doctest eigen3 nlohmann-json taskflow thrust
+./vcpkg install --recurse --overlay-ports=../../vcpkg/overlay_ports cxxopts doctest eigen3 nlohmann-json openxr-loader sdl2 spdlog stb taskflow thrust
 cd ..
 
 cmake -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake ..
